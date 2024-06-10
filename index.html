@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>청소당번 뽑기</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+  #lotto-number {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+<h1>청소당번 뽑기</h1>
+<div id="lotto-number"></div>
+<button onclick="generateLotto()">당번뽑기</button>
+
+<script>
+function generateRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function generateLotto() {
+  var lottoNumbers = [];
+  var min = 1;
+  var max = 45;
+  
+  // 6개의 공 번호 생성
+  while (lottoNumbers.length < 6) {
+    var randomNumber = generateRandomNumber(min, max);
+    
+    // 중복된 번호 제거
+    if (!lottoNumbers.includes(randomNumber)) {
+      lottoNumbers.push(randomNumber);
+    }
+  }
+  
+  // 번호 정렬
+  lottoNumbers.sort(function(a, b) {
+    return a - b;
+  });
+  
+  // 번호 출력
+  var lottoNumberElement = document.getElementById("lotto-number");
+  lottoNumberElement.textContent = lottoNumbers.join(", ");
+}
+</script>
+</body>
+</html>
